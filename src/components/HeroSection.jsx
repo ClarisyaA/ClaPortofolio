@@ -1,5 +1,5 @@
 import { ArrowDown } from "lucide-react"
-import headerImg from "../assets/img/isya1.jpg";
+import headerImg from "../assets/img/isya1.JPG";
 
 export const HeroSection = () => {
     return <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center px-4">
