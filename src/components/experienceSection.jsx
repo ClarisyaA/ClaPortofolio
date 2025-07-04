@@ -112,7 +112,7 @@ const experiences = {
     {
       title: "Head of Economics Speaker Division",
       place: "LOGYTER 2023",
-      date: "October 2024",
+      date: "October 2023",
       description:
         "Led 6 members, focused on MSME digitalization using Google Maps, and gave training to MSME owners.",
       images: Array.from({ length: 6 }, (_, i) => `/projects/experiences/logyter/${i + 1}.jpg`),
