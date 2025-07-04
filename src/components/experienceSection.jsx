@@ -40,7 +40,7 @@ const experiences = {
   org: [
     {
       title: "Head of External Affairs",
-      place: "Informatics Festival 2024 x Himatif",
+      place: "Informatics Festival 2025 x Himatif",
       date: "June 2025 – Present",
       description:
         "Led Sponsorship, PR, and Marketing divisions. Managed MoUs, partnerships, and external communications.",
@@ -75,17 +75,17 @@ const experiences = {
       type: "Project Management",
     },
     {
-      title: "Staff – Career Development Department",
-      place: "Informatics Festival 2024",
-      date: "June 2024 – Oct 2024",
-      description:
-        "Oversaw PR division performance, assisted in program execution, and collaborated across departments.",
-      images: [
-        "/projects/experiences/keprof/HGD2.jpg",
-        "/projects/experiences/keprof/Keprof23.jpg",
-        "/projects/experiences/keprof/IFFD2024.jpg"
-      ],
-      type: "Team Member",
+    title: "Staff – Career Development Department",
+    place: "HIMATIF FMIPA Unpad",
+    date: "Feb 2024 – Present",
+    description:
+      "Coordinated ICOMPAS company visit to BCA with 70+ participants and led ICOMPAS 2 webinar with Traveloka, reaching 130+ attendees in 7 days.",
+    images: [
+      "/projects/experiences/keprof/HGD2.jpg",
+      "/projects/experiences/keprof/Keprof23.jpg",
+      "/projects/experiences/keprof/IFFD2024.jpg"
+    ],
+    type: "Project Management",
     },
     {
     title: "Staff – Human Resource Division",
