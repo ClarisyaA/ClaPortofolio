@@ -59,7 +59,7 @@ const experiences = {
     {
       title: "Project Officer – ICOMPAS 2",
       place: "Career Development Dept. Himatif",
-      date: "April 2024",
+      date: "October 2024",
       description:
         "Planned & hosted online career webinar with Traveloka in 7 days, attended by 130+ participants.",
       images: ["/projects/experiences/keprof/ICOMPAS2.jpg"],
@@ -68,7 +68,7 @@ const experiences = {
     {
       title: "Vice Project Officer – ICOMPAS 1",
       place: "Career Development Dept. Himatif",
-      date: "September 2023",
+      date: "September 2024",
       description:
         "Coordinated team ops, worked with BCA Foresta BSD for company visit of 70 participants.",
       images: ["/projects/experiences/keprof/ICOMPAS1.jpg"],
@@ -88,6 +88,15 @@ const experiences = {
     type: "Project Management",
     },
     {
+      title: "Staff – Kakak Asuh/Mentor Division",
+      place: "Character Building Season 2024",
+      date: "Aug 2024 – Oct 2024",
+      description:
+        "Mentored 8 freshmen, introduced academic/campus life, and provided support system.",
+      images: Array.from({ length: 24 }, (_, i) => `/projects/experiences/kasuh/${i + 1}.jpg`),
+      type: "Mentorship",
+    },
+    {
     title: "Staff – Human Resource Division",
     place: "Informatics Festival 2024",
     date: "June 2024 – Oct 2024",
@@ -99,15 +108,6 @@ const experiences = {
         ...Array.from({ length: 7 }, (_, i) => `/projects/experiences/IFEST/${i + 1}.jpg`)
     ],
     type: "Team Member",
-    },
-    {
-      title: "Staff – Kakak Asuh/Mentor Division",
-      place: "Character Building Season 2024",
-      date: "June 2024 – Oct 2024",
-      description:
-        "Mentored 8 freshmen, introduced academic/campus life, and provided support system.",
-      images: Array.from({ length: 24 }, (_, i) => `/projects/experiences/kasuh/${i + 1}.jpg`),
-      type: "Mentorship",
     },
     {
       title: "Head of Economics Speaker Division",
