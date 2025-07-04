@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+/* Swiper Pagination Dots Styling */
+.swiper-pagination-bullet {
+  background-color: #d1d5db !important;
+  opacity: 0.6;
+  width: 8px;
+  height: 8px;
+  margin: 0 4px !important;
+  border-radius: 9999px;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #4A2FBD !important;
+  opacity: 1;
+}
+
+
 @theme {
   --color-border: hsl(var(--border));
   --color-background: hsl(var(--background));
