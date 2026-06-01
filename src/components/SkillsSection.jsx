@@ -1,84 +1,105 @@
-import { useState } from "react";
+import {
+  SiAlpinedotjs,
+  SiArduino,
+  SiCplusplus,
+  SiFigma,
+  SiGit,
+  SiGithub,
+  SiGooglecolab,
+  SiJavascript,
+  SiJupyter,
+  SiLaravel,
+  SiMysql,
+  SiNextdotjs,
+  SiNumpy,
+  SiOpenai,
+  SiOpencv,
+  SiPandas,
+  SiPostgresql,
+  SiPython,
+  SiReact,
+  SiScikitlearn,
+  SiStreamlit,
+  SiSupabase,
+  SiTailwindcss,
+  SiVercel,
+} from "react-icons/si";
+import { BarChart3, Bot, BrainCircuit, ChartNoAxesCombined, Code2, DatabaseZap } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const skills = [
-  // Frontend
-  { name: "HTML/CSS", level: 85, category: "frontend" },
-  { name: "JavaScript", level: 75, category: "frontend" },
-
-  // Backend / Programming
-  { name: "Python", level: 70, category: "backend" },
-  { name: "Java", level: 70, category: "backend" },
-  { name: "C++", level: 70, category: "backend" },
-  { name: "PHP", level: 70, category: "backend" },
-  { name: "MySQL", level: 70, category: "backend" },
-
-  // Tools
-  { name: "Git/GitHub", level: 75, category: "tools" },
-  { name: "Figma", level: 80, category: "tools" },
-  { name: "VS Code", level: 85, category: "tools" },
-  { name: "Canva", level: 90, category: "tools" },
-  { name: "Microsoft Office", level: 90, category: "tools" },
-  { name: "CapCut", level: 90, category: "tools" },
-
-  // Soft Skills
-    { name: "Leadership", level: 90, category: "softskills" },
-    { name: "Communication", level: 85, category: "softskills" },
-    { name: "Time Management", level: 90, category: "softskills" },
-    { name: "Teamwork", level: 85, category: "softskills" },
-    { name: "Problem Solving", level: 90, category: "softskills" },
-    { name: "Public Speaking", level: 80, category: "softskills" },
-
+  { name: "Python", icon: SiPython, tone: "text-yellow-500" },
+  { name: "JavaScript", icon: SiJavascript, tone: "text-yellow-400" },
+  { name: "C++", icon: SiCplusplus, tone: "text-blue-500" },
+  { name: "SQL", icon: DatabaseZap, tone: "text-cyan-500" },
+  { name: "React", icon: SiReact, tone: "text-sky-400" },
+  { name: "Next.js", icon: SiNextdotjs, tone: "text-foreground" },
+  { name: "Laravel", icon: SiLaravel, tone: "text-red-500" },
+  { name: "Tailwind CSS", icon: SiTailwindcss, tone: "text-cyan-400" },
+  { name: "Alpine.js", icon: SiAlpinedotjs, tone: "text-teal-500" },
+  { name: "Streamlit", icon: SiStreamlit, tone: "text-red-500" },
+  { name: "MySQL", icon: SiMysql, tone: "text-blue-500" },
+  { name: "PostgreSQL", icon: SiPostgresql, tone: "text-blue-600" },
+  { name: "Supabase", icon: SiSupabase, tone: "text-emerald-500" },
+  { name: "Pandas", icon: SiPandas, tone: "text-indigo-500" },
+  { name: "NumPy", icon: SiNumpy, tone: "text-blue-500" },
+  { name: "Scikit-learn", icon: SiScikitlearn, tone: "text-orange-500" },
+  { name: "XGBoost", icon: ChartNoAxesCombined, tone: "text-green-500" },
+  { name: "RAG", icon: SiOpenai, tone: "text-emerald-500" },
+  { name: "OpenCV", icon: SiOpencv, tone: "text-green-500" },
+  { name: "MediaPipe", icon: BrainCircuit, tone: "text-purple-500" },
+  { name: "Pose Estimation", icon: Bot, tone: "text-pink-500" },
+  { name: "PySerial", icon: SiArduino, tone: "text-teal-500" },
+  { name: "Git", icon: SiGit, tone: "text-orange-600" },
+  { name: "GitHub", icon: SiGithub, tone: "text-foreground" },
+  { name: "Jupyter", icon: SiJupyter, tone: "text-orange-500" },
+  { name: "Google Colab", icon: SiGooglecolab, tone: "text-yellow-500" },
+  { name: "VS Code", icon: Code2, tone: "text-blue-500" },
+  { name: "Power BI", icon: BarChart3, tone: "text-yellow-500" },
+  { name: "Figma", icon: SiFigma, tone: "text-pink-500" },
+  { name: "Vercel", icon: SiVercel, tone: "text-foreground" },
 ];
 
-const categories = ["all", "frontend", "backend", "tools", "softskills"];
+const firstRow = skills.slice(0, 15);
+const secondRow = skills.slice(15);
+
+const SkillPill = ({ skill }) => {
+  const Icon = skill.icon;
+
+  return (
+    <div className="skill-pill">
+      <Icon className={cn("h-7 w-7 shrink-0", skill.tone)} />
+      <span className="whitespace-nowrap text-sm font-semibold">{skill.name}</span>
+    </div>
+  );
+};
+
+const SkillMarquee = ({ items, reverse = false }) => (
+  <div className="skill-marquee" aria-hidden="true">
+    <div className={cn("skill-marquee-track", reverse && "skill-marquee-reverse")}>
+      {[...items, ...items].map((skill, index) => (
+        <SkillPill key={`${skill.name}-${index}`} skill={skill} />
+      ))}
+    </div>
+  </div>
+);
 
 export const SkillsSection = () => {
-        const [activeCategory, setActiveCategory] = useState("all");
+  return (
+    <section id="skills" className="py-16 sm:py-20 md:py-24 px-4 md:px-24 relative bg-secondary/30 overflow-hidden">
+      <div className="container mx-auto max-w-6xl">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
+          My<span className="text-primary text-glow"> Skills</span>
+        </h2>
+        <p className="text-center text-muted-foreground mb-10 max-w-2xl mx-auto">
+          Tools and technologies I use across AI, data, web development, and creative problem solving.
+        </p>
+      </div>
 
-        const filteredSkills = skills.filter((skill) => activeCategory === "all" || skill.category === activeCategory);
-
-    return (
-        <section id="skills" className="py-24 px-24 relative bg-secondary/30">
-            <div className="container mx-auto maz-w-5xl">
-                <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center" >
-                    My<span className="text-primary text-glow"> Skills</span>
-                </h2>
-
-                <div className="flex flex-warp justify-center gap-4 mb-12">
-                    {categories.map((category, key) => (
-                        <button
-                        onClick={() => setActiveCategory(category)}
-                        key={key} className={cn("px-5 py-2 rounded-full transition-colors duration-300 capitalize",
-                            activeCategory === category ? "bg-primary text-primary-foreground" : "bg-secondary/70 text-foreground hover:bd-secondary"
-                        )}>
-                            {category}
-                        </button>
-                    ))}
-
-                </div>
-
-                <div className="grid grid-col1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {filteredSkills.map((skill,key) => (
-                        <div key={key} className="bg-card p-6 rounded-lg shadow-xs card-hover">
-
-                            <div className="text-left mb-4">
-                                <h3 className="font-semibold text-lg">{skill.name}</h3>
-                            </div>
-
-                           <div className="w-full bg-secondary/50 h-2 rounded-lg border-1 border-primary overflow-hidden">
-                                <div className="bg-primary h-2 rounded-full origin-left animate-[grow_1.5s_ease-out" 
-                                style={{width:skill.level+ "%"}}/>
-                            </div>
-                            <div className="text-right mt-1">
-                                <span className="text-sm text-muted-foreground">{skill.level}%</span>
-                            </div>
-                        </div>                       
-                    ))}
-
-                </div>
-
-            </div>
-        </section>
-    );
+      <div className="space-y-4 sm:space-y-5">
+        <SkillMarquee items={firstRow} />
+        <SkillMarquee items={secondRow} reverse />
+      </div>
+    </section>
+  );
 };

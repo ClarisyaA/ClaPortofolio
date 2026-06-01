@@ -1,15 +1,82 @@
-import { ArrowLeft, ArrowRight, ExternalLink, GithubIcon } from "lucide-react";
-import { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
+import { ArrowRight, ChevronLeft, ChevronRight, ExternalLink, GithubIcon, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { SkeletonImage } from "@/components/SkeletonImage";
 
 
 const techProjects = [
     {
+        id: "temantumbuh",
+        title: "TemanTumbuh - AI Mental Wellness App",
+        role: "Front-End Developer",
+        description: "AI-powered mental wellness web app with mood check-in, TemanCerita chatbot, insight dashboard, user dashboard, and admin pages.",
+        image: "/projects/TemanTumbuh.png",
+        tags: ["Next.js", "React", "Tailwind CSS", "Shadcn/ui", "Supabase", "OpenAI API"],
+        demoUrl: "https://temantumbuh.vercel.app/",
+        githubUrl: "#",
+    },
+    {
+        id: "boreyes-2026",
+        title: "BOREYES 2026 International Energy Fair",
+        role: "Front-End Developer",
+        description: "Responsive event platform with 10+ pages, authentication, admin dashboard, GSAP animations, and Swiper interactions.",
+        image: "/projects/Boreyes.png",
+        tags: ["Laravel Blade", "Tailwind CSS", "JavaScript", "Alpine.js", "GSAP", "Swiper"],
+        demoUrl: "https://boreyes2026.com",
+        githubUrl: "#",
+    },
+    {
+        id: "robot-wasit",
+        title: "Robot Wasit - Computer Vision Referee Robot",
+        role: "Computer Vision Developer",
+        description: "Real-time referee system using body landmark tracking, hit detection, scoring UI, health bar, and Arduino robot movement via PySerial.",
+        image: "/projects/RobotWasit.jpeg",
+        tags: ["Python", "OpenCV", "MediaPipe", "PySerial", "Arduino", "Computer Vision"],
+        demoUrl: "https://www.youtube.com/watch?v=itYGWQ5tNTA",
+        githubUrl: "#",
+    },
+    {
+        id: "voiceboost-ai",
+        title: "VoiceBoost AI - Dysarthria Classification",
+        role: "Machine Learning Developer",
+        description: "Streamlit machine learning app for speech classification with prediction output and confidence score interpretation.",
+        image: "/projects/VoiceBoost.png",
+        tags: ["Python", "Streamlit", "Machine Learning", "Scikit-learn", "Audio Processing"],
+        demoUrl: "https://clarisyaa-voiceboostai-app-p6afif.streamlit.app/",
+        githubUrl: "#",
+    },
+    {
+        id: "tutorai",
+        title: "TutorAI - RAG + 3D Avatar Assistant",
+        role: "AI & Front-End Developer",
+        description: "AI-powered educational assistant with RAG knowledge base preparation, 3D avatar learning interface, speech interaction, and API integration.",
+        image: "/projects/TutorAI.jpeg",
+        tags: ["React", "JavaScript", "RAG", "API Integration", "3D Avatar", "AI"],
+        demoUrl: "https://www.youtube.com/watch?v=pi-Zoll-Ja4&t=710s",
+    },
+    {
+        id: "home-credit-risk",
+        title: "Home Credit Default Risk Prediction",
+        role: "Data Scientist",
+        description: "Credit risk prediction model using XGBoost on 300K+ applicants with feature engineering, SHAP analysis, Power BI dashboard, and approval threshold optimization.",
+        image: "/projects/experiences/HomeCredit/HomeCredit.svg",
+        tags: ["Python", "XGBoost", "Pandas", "SHAP", "Power BI", "Data Science"],
+        demoUrl: "#",
+        githubUrl: "https://github.com/ClarisyaA/HomeCredit_DefaultRisk",
+    },
+    {
+        id: "marketsync",
+        title: "MarketSync - Marketing Channel DSS",
+        role: "Data Analyst",
+        description: "Data-driven dashboard for marketing channel optimization using PCA and K-Means clustering for customer segmentation and business insights.",
+        image: "/projects/Boo.png",
+        tags: ["Streamlit", "Python", "PCA", "K-Means", "Data Visualization", "Analytics"],
+        demoUrl: "https://marketsync.streamlit.app/",
+        githubUrl: "#",
+    },
+    {
         id: 1,
         title: "Fam Property",
+        role: "Fullstack Developer",
         description: "A PHP & MySQL-based platform for managing real estate listings, transactions, and clients with a user-friendly admin panel.",
         image: "/projects/fam.png",
         tags: ["PHP", "MySQL", "HTML", "CSS", "JavaScript", "Web Development"],
@@ -19,6 +86,7 @@ const techProjects = [
     {
         id: 2,
         title: "Kuliner Jatinangor",
+        role: "Fullstack Developer",
         description: "A local culinary review site with login system, restaurant listings, user reviews, and dark mode support.",
         image: "/projects/Boo.png",
         tags: ["PHP", "MySQL", "HTML", "CSS", "Web Development"],
@@ -28,6 +96,7 @@ const techProjects = [
     {
         id: 3,
         title: "Color Dominant Picker",
+        role: "Machine Learning Developer",
         description: "Streamlit app that extracts dominant colors from images using K-Means and displays results in PNG/CSV formats.",
         image: "/projects/colorPalette.png",
         tags: ["Python", "Streamlit", "K-Means Clustering", "Image Processing", "Machine Learning"],
@@ -37,6 +106,7 @@ const techProjects = [
     {
         id: 4,
         title: "Berrywell - Wellness App",
+        role: "UI/UX Designer",
         description: "A wellness app prototype that helps users manage weight via health tracking, food scans, and AI-based plans.",
         image: "/projects/berry.png",
         tags: ["UI/UX Design", "Figma", "HealthTech", "Design Thinking", "Mobile App"],
@@ -46,6 +116,7 @@ const techProjects = [
     {
         id: 5,
         title: "Seluna - Women's Safety App",
+        role: "UI/UX Designer",
         description: "Mobile app prototype offering safe route suggestions for women based on lighting, crowd data, and crime statistics.",
         image: "/projects/seluna.png",
         tags: ["UI/UX Design", "Figma", "Safety Tech", "Crowdsourced Data", "Mobile App"],
@@ -405,29 +476,173 @@ const tabs = [
     { id: "photography", label: "Photography", projects: photographyProjects },
 ];
 
+const crochetOrderUrl = `https://wa.me/6283807743555?text=${encodeURIComponent(
+  "Nama: \nCustom Crochet: "
+)}`;
+
+const getProjectImages = (project) => project.images || [project.image].filter(Boolean);
+
+const ProjectImageModal = ({ title, images, currentIndex, onClose, onNext, onPrev, onSelect }) => {
+  const hasMultipleImages = images.length > 1;
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") onClose();
+      if (event.key === "ArrowRight" && hasMultipleImages) onNext();
+      if (event.key === "ArrowLeft" && hasMultipleImages) onPrev();
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "unset";
+    };
+  }, [hasMultipleImages, onClose, onNext, onPrev]);
+
+  return (
+    <div className="fixed inset-0 overlay-layer bg-black/90 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
+      <div className="relative flex h-full max-h-[88vh] w-full max-w-6xl flex-col">
+        <div className="mb-4 flex items-center justify-between gap-4">
+          <div className="min-w-0">
+            <h3 className="truncate text-base sm:text-lg font-semibold text-white">{title}</h3>
+            {hasMultipleImages && (
+              <p className="text-sm text-white/70">
+                {currentIndex + 1} / {images.length}
+              </p>
+            )}
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+            aria-label="Close image preview"
+          >
+            <X size={22} />
+          </button>
+        </div>
+
+        <div className="relative flex min-h-0 flex-1 items-center justify-center">
+          <SkeletonImage
+            src={images[currentIndex]}
+            alt={`${title} preview ${currentIndex + 1}`}
+            className="max-h-full w-full rounded-lg object-contain shadow-2xl"
+          />
+
+          {hasMultipleImages && (
+            <>
+              <button
+                type="button"
+                onClick={onPrev}
+                className="absolute left-1 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-black/60 text-white backdrop-blur-sm transition-colors hover:bg-black/80 sm:left-2 md:left-4 md:h-11 md:w-11"
+                aria-label="Previous image"
+              >
+                <ChevronLeft size={24} />
+              </button>
+              <button
+                type="button"
+                onClick={onNext}
+                className="absolute right-1 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-black/60 text-white backdrop-blur-sm transition-colors hover:bg-black/80 sm:right-2 md:right-4 md:h-11 md:w-11"
+                aria-label="Next image"
+              >
+                <ChevronRight size={24} />
+              </button>
+            </>
+          )}
+        </div>
+
+        {hasMultipleImages && (
+          <div className="mt-4 flex justify-center gap-2 overflow-x-auto pb-1">
+            {images.map((image, index) => (
+              <button
+                key={`${image}-${index}`}
+                type="button"
+                onClick={() => onSelect(index)}
+                className={`h-14 w-20 shrink-0 overflow-hidden rounded-md border-2 transition-all ${
+                  index === currentIndex
+                    ? "border-white ring-2 ring-white/40"
+                    : "border-white/20 hover:border-white/60"
+                }`}
+                aria-label={`Open image ${index + 1}`}
+              >
+                <SkeletonImage
+                  src={image}
+                  alt={`${title} thumbnail ${index + 1}`}
+                  className="h-full w-full object-cover"
+                />
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 export const ProjectsSection = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [showAll, setShowAll] = useState(false);
+  const [imageModal, setImageModal] = useState(null);
+  const activeIndex = tabs.findIndex((tab) => tab.id === activeTab);
 
   const allTabProjects = tabs.find((tab) => tab.id === activeTab)?.projects || allProjects;
   const currentProjects = showAll ? allTabProjects : allTabProjects.slice(0, 9);
 
   const isVisualProject = (tags) => tags?.includes("Crochet") || tags?.includes("Photography");
+  const openImageModal = (project, index = 0) => {
+    const images = getProjectImages(project);
+    if (images.length === 0) return;
+
+    setImageModal({
+      title: project.title,
+      images,
+      currentIndex: index,
+    });
+  };
+
+  const closeImageModal = () => setImageModal(null);
+  const showNextImage = () => {
+    setImageModal((modal) =>
+      modal
+        ? { ...modal, currentIndex: (modal.currentIndex + 1) % modal.images.length }
+        : modal
+    );
+  };
+  const showPrevImage = () => {
+    setImageModal((modal) =>
+      modal
+        ? {
+            ...modal,
+            currentIndex:
+              (modal.currentIndex - 1 + modal.images.length) % modal.images.length,
+          }
+        : modal
+    );
+  };
+  const selectModalImage = (index) => {
+    setImageModal((modal) => (modal ? { ...modal, currentIndex: index } : modal));
+  };
 
   return (
-    <section id="projects" className="py-24 px-4 md:px-24 relative">
+    <section id="projects" className="py-16 sm:py-20 md:py-24 px-4 md:px-24 relative">
       <div className="container mx-auto max-w-6xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-          Featured <span className="text-primary">Projects</span>
-        </h2>
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Here are some of my recent projects across different disciplines. Each project was carefully
-          crafted with attention to detail, performance, and user experiences.
-        </p>
+        <div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
+            Featured <span className="text-primary">Projects</span>
+          </h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Here are some of my recent projects across AI, data, web, product design, crochet, and photography.
+          </p>
+        </div>
 
         {/* Tab Navigation */}
-        <div className="flex justify-center mb-12">
-          <div className="relative flex flex-wrap gap-1 p-1 bg-secondary/20 rounded-full border border-border/50 backdrop-blur-sm">
+        <div className="mb-10 md:mb-12 overflow-x-auto pb-3">
+          <div
+            className="relative grid min-w-[38rem] md:min-w-0 w-full max-w-3xl grid-cols-4 gap-1 rounded-full border border-border/50 bg-secondary/20 p-1 backdrop-blur-sm mx-auto"
+            style={{ "--active-project-tab": activeIndex }}
+          >
+            <div className="project-tab-indicator" />
             {tabs.map((tab) => (
               <button
                 key={tab.id}
@@ -435,26 +650,36 @@ export const ProjectsSection = () => {
                   setActiveTab(tab.id);
                   setShowAll(false);
                 }}
-                className={`relative px-6 py-3 text-sm font-medium rounded-full transition-all duration-300 ease-in-out transform hover:scale-105 ${
+                className={`content-raised min-h-12 px-3 py-3 text-sm font-semibold rounded-full transition-all duration-300 ease-in-out hover:scale-[1.03] ${
                   activeTab === tab.id
-                    ? "text-primary-foreground shadow-lg"
+                    ? "text-primary-foreground"
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
-                {activeTab === tab.id && (
-                  <div className="absolute inset-0 bg-primary rounded-full shadow-lg animate-in slide-in-from-left-1 duration-300" />
-                )}
-                <span className="relative z-10">{tab.label}</span>
+                {tab.label}
               </button>
             ))}
           </div>
         </div>
 
+        {activeTab === "crochet" && (
+          <div className="mb-10 flex justify-center">
+            <a
+              href={crochetOrderUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="crochet-order-button"
+            >
+              Order Custom Here
+            </a>
+          </div>
+        )}
+
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div key={activeTab} className="project-grid-enter grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {currentProjects.map((project) => (
             <div
-              key={project.id}
+              key={`${project.title}-${project.id}`}
               className={`bg-card rounded-lg overflow-hidden shadow-md group transition-all duration-300 ${
                 isVisualProject(project.tags)
                   ? "hover:shadow-xl"
@@ -463,36 +688,28 @@ export const ProjectsSection = () => {
             >
               {/* Image / Slider */}
               <div className={isVisualProject(project.tags) ? "h-64" : "h-48"}>
-                {project.images && project.images.length > 1 ? (
-                  <Swiper
-                    modules={[Pagination, Autoplay]}
-                    pagination={{ clickable: true }}
-                    autoplay={{ delay: 3000, disableOnInteraction: false }}
-                    loop
-                    className="h-full group relative"
-                  >
-                    {project.images.map((img, i) => (
-                      <SwiperSlide key={i}>
-                        <img
-                          src={img}
-                          alt={`${project.title} ${i + 1}`}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                ) : (
-                  <img
-                    src={project.images ? project.images[0] : project.image}
+                <button
+                  type="button"
+                  onClick={() => openImageModal(project)}
+                  className="h-full w-full overflow-hidden text-left"
+                  aria-label={`Open ${project.title} image preview`}
+                >
+                  <SkeletonImage
+                    src={getProjectImages(project)[0]}
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                )}
+                </button>
               </div>
 
               {/* Card Content */}
               <div className="p-4 text-center">
                 <h3 className="text-lg md:text-xl font-semibold mb-2">{project.title}</h3>
+                {project.role && (
+                  <p className="mb-3 text-sm font-semibold text-primary">
+                    {project.role}
+                  </p>
+                )}
                 <div className="flex flex-wrap justify-center gap-2 mb-2">
                   {project.tags.map((tag, index) => (
                     <span
@@ -561,6 +778,18 @@ export const ProjectsSection = () => {
           </a>
         </div>
       </div>
+
+      {imageModal && (
+        <ProjectImageModal
+          title={imageModal.title}
+          images={imageModal.images}
+          currentIndex={imageModal.currentIndex}
+          onClose={closeImageModal}
+          onNext={showNextImage}
+          onPrev={showPrevImage}
+          onSelect={selectModalImage}
+        />
+      )}
     </section>
   );
 };

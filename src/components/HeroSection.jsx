@@ -1,26 +1,27 @@
 import { ArrowDown } from "lucide-react"
 import headerImg from "../assets/img/isya1.JPG";
+import { SkeletonImage } from "@/components/SkeletonImage";
 
 export const HeroSection = () => {
-    return <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center px-4">
-        <div className="container max-w-4xl mx-auto text-center z-10">
-                            <div className="container max-w-5xl mx-auto text-center z-10">
-                            <div className="flex justify-center mb-6">
-                            <img
-                                src={headerImg} // sesuaikan path
-                                alt="Clarisya"
-                                className="w-40 h-40 rounded-3xl shadow-blue-300 object-cover border-4 border-primary animate-float">
-                            </img>
-                            </div>
-                        </div>
+    return <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center px-4 pt-24 pb-16">
+        <div className="container max-w-4xl mx-auto text-center content-raised">
+            <div className="flex justify-center mb-6">
+                <SkeletonImage
+                    src={headerImg}
+                    alt="Clarisya"
+                    eager
+                    skeletonClassName="w-32 h-32 sm:w-40 sm:h-40 rounded-3xl shadow-blue-300 border-4 border-primary animate-float"
+                    className="w-full h-full object-cover"
+                />
+            </div>
             <div className="space-y-6">
-                <h1 className="text-4xl md:text-6xl font-bold tracking-tight animate-float">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tight animate-float">
                     <span className="opacity-0 animate-fade-in">Hi, i'm</span> 
                     <span className="opacity-0 animate-fade-in-delay-1 text-glow text-primary"> {" "} Clarisya</span>
                     <span className="opacity-0 animate-fade-in-delay-2 text-glow text-gradient">{" "} Adeline</span>
                 </h1>
                 <div className="animate-float opacity-80 text-glow">
-                    <p className="text-lg md:text-xl text-muted-foreground max-2-2xl mx-auto opacity-0 animate-fade-in-delay-3">
+                    <p className="mx-auto max-w-3xl text-base sm:text-lg md:text-xl leading-relaxed text-muted-foreground opacity-0 animate-fade-in-delay-3">
                         {/* Hi, I'm an Informatics Engineering student at Padjadjaran University with a passion for technology, creativity, and meaningful impact. 
                         I enjoy building digital solutions, leading initiatives, and continuously learning across disciplines. 
                         Whether it's launching small businesses, organizing campus events, or developing tech skills in Python, C++, and web development, 
