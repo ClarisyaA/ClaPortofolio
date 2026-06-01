@@ -259,6 +259,20 @@ const timelineExperiences = [
 
 const certifications = [
   {
+    title: "Understanding Augmented and Virtual Reality",
+    image: "/projects/certifications/ARVR.png",
+    url: "/projects/certifications/CertificateOfCompletion_Understanding Augmented and Virtual Reality An Introduction (2).pdf",
+    issuer: "LinkedIn Learning",
+    year: "2026",
+  },
+  {
+    title: "Agile Software Development",
+    image: "/projects/certifications/Agile.png",
+    url: "/projects/certifications/CertificateOfCompletion_Agile Software Development (3).pdf",
+    issuer: "LinkedIn Learning",
+    year: "2026",
+  },
+  {
     title: "Home Credit Indonesia - Project-Based Virtual Internship",
     image: "/projects/certifications/HomeCredit.png",
     url: "/projects/certifications/pbi-certificate-361218IAPCGIH29122025 (1).pdf",
@@ -279,13 +293,7 @@ const certifications = [
     issuer: "LinkedIn Learning",
     year: "2025",
   },
-  {
-    title: "Agile Software Development",
-    image: "/projects/certifications/Agile.png",
-    url: "/projects/certifications/CertificateOfCompletion_Agile Software Development (3).pdf",
-    issuer: "LinkedIn Learning",
-    year: "2025",
-  },
+  
   {
     title: "Programming Foundations - Software Testing/QA",
     image: "/projects/certifications/Testing.png",
@@ -307,13 +315,7 @@ const certifications = [
     issuer: "LinkedIn Learning",
     year: "2025",
   },
-  {
-    title: "Understanding Augmented and Virtual Reality",
-    image: "/projects/certifications/ARVR.png",
-    url: "/projects/certifications/CertificateOfCompletion_Understanding Augmented and Virtual Reality An Introduction (2).pdf",
-    issuer: "LinkedIn Learning",
-    year: "2025",
-  },
+  
   {
     title: "BNSP Sertifikasi Junior Web Developer",
     image: "/projects/certifications/BNSP-1.png",
