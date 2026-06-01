@@ -196,6 +196,7 @@
   html {
     @apply scroll-smooth;
     overflow-x: hidden;
+    scroll-padding-top: 4rem;
   }
 
   body {
