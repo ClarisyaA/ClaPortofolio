@@ -40,7 +40,7 @@ export const NotFound = () => {
             key={`${logo.src}-${index}`}
             src={logo.src}
             alt=""
-            className={`not-found-logo-scattered ${logo.size}`}
+            className={`not-found-logo-scattered absolute ${logo.size} bg-transparent object-contain p-0 shadow-none ring-0 border-0 rounded-none`}
             style={{
               left: logo.x,
               top: logo.y,
@@ -53,7 +53,6 @@ export const NotFound = () => {
       </div>
 
       <section className="container relative mx-auto flex min-h-screen max-w-5xl flex-col items-center justify-center text-center">
-
         <h1 className="not-found-title text-[6rem] font-black leading-none text-primary sm:text-[9rem] md:text-[12rem]">
           404
         </h1>
@@ -61,8 +60,10 @@ export const NotFound = () => {
         <h2 className="mt-4 text-3xl font-bold text-foreground sm:text-4xl">
           Not Found
         </h2>
+
         <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Looks like this page drifted away from the portfolio path. Let&apos;s bring you back to the work that actually exists.
+          Looks like this page drifted away from the portfolio path. Let&apos;s
+          bring you back to the work that actually exists.
         </p>
 
         <div className="relative mt-10 flex flex-col gap-3 sm:flex-row">
@@ -73,6 +74,7 @@ export const NotFound = () => {
             <Home size={18} />
             Back Home
           </Link>
+
           <Link
             to="/experience"
             className="inline-flex items-center justify-center gap-2 rounded-full border border-primary px-6 py-2 font-medium text-primary transition-colors duration-300 hover:bg-primary/10"
