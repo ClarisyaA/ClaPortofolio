@@ -131,6 +131,37 @@
       transform: translateX(220%) skewX(-18deg);
     }
   }
+
+  @keyframes not-found-logo-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes not-found-logo-float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(-4deg);
+    }
+    50% {
+      transform: translateY(-10px) rotate(5deg);
+    }
+  }
+
+  @keyframes not-found-title-glow {
+    0%,
+    100% {
+      text-shadow: 0 0 18px hsl(var(--primary) / 0.25);
+      transform: translateY(0);
+    }
+    50% {
+      text-shadow: 0 0 34px hsl(var(--primary) / 0.45);
+      transform: translateY(-4px);
+    }
+  }
 }
 
 @layer base {
@@ -404,6 +435,48 @@ body {
   transform: translateY(0) scale(0.98);
 }
 
+.not-found-logo-row {
+  display: flex;
+  width: max-content;
+  min-width: 200%;
+  align-items: center;
+  gap: 1.5rem;
+  animation: not-found-logo-marquee 26s linear infinite;
+}
+
+.not-found-logo-row-reverse {
+  animation-direction: reverse;
+  animation-duration: 34s;
+}
+
+.not-found-logo {
+  flex: 0 0 auto;
+  border-radius: 1.25rem;
+  background: hsl(var(--card) / 0.8);
+  padding: 0.45rem;
+  box-shadow: 0 18px 40px hsl(var(--primary) / 0.16);
+  backdrop-filter: blur(12px);
+  animation: not-found-logo-float 3.6s ease-in-out infinite;
+}
+
+.not-found-logo-scattered {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border-radius: 1.15rem;
+  background: hsl(var(--card) / 0.62);
+  padding: 0.4rem;
+  box-shadow: 0 18px 42px hsl(var(--primary) / 0.18);
+  backdrop-filter: blur(10px);
+  animation: not-found-logo-float 4.2s ease-in-out infinite;
+}
+
+.not-found-title {
+  background: linear-gradient(135deg, #4c1d95, #7c3aed, #a78bfa, #ede9fe);
+  background-clip: text;
+  color: transparent;
+  animation: not-found-title-glow 3s ease-in-out infinite;
+}
+
 .page-loader {
   position: relative;
 }
@@ -504,7 +577,11 @@ body {
 
   .page-loader-orbit::before,
   .page-loader-orbit span,
-  .image-skeleton::after {
+  .image-skeleton::after,
+  .not-found-logo-row,
+  .not-found-logo,
+  .not-found-logo-scattered,
+  .not-found-title {
     animation: none;
   }
 }
