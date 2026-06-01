@@ -198,10 +198,30 @@
     overflow-x: hidden;
   }
 
-body {
+  body {
     @apply bg-background text-foreground transition-colors duration-300;
     font-feature-settings: "rlig" 1, "calt" 1;
     overflow-x: hidden;
+  }
+
+  button,
+  [role="button"],
+  a,
+  select,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"] {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [role="button"]:disabled,
+  input[type="button"]:disabled,
+  input[type="submit"]:disabled,
+  input[type="reset"]:disabled,
+  button[disabled],
+  [disabled] {
+    cursor: not-allowed;
   }
 }
 
