@@ -46,6 +46,13 @@ export const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [location.pathname]);
 
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
+
   const getIsActive = (item) => {
     if (item.sectionId) {
       return location.pathname === "/" && activeSection === item.sectionId;
@@ -81,7 +88,11 @@ export const Navbar = () => {
     <nav
       className={cn(
         "fixed w-full nav-layer transition-all duration-300",
-        isScrolled ? "py-3 bg-background/80 backdrop-blur-md shadow-xs" : "py-5"
+        isMenuOpen
+          ? "py-5 bg-transparent shadow-none"
+          : isScrolled
+            ? "py-3 bg-background/80 backdrop-blur-md shadow-xs"
+            : "py-5"
       )}
     >
       <div className="container flex items-center justify-between gap-3">
@@ -116,28 +127,33 @@ export const Navbar = () => {
         {/* mobile nav */}
         <button
           onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="md:hidden shrink-0 p-2 text-foreground floating-control-layer"
+          className={cn(
+            "md:hidden shrink-0 p-2 text-foreground rounded-full bg-background/80 backdrop-blur-md",
+            isMenuOpen ? "fixed right-6 top-5 overlay-layer" : "floating-control-layer"
+          )}
+          aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={isMenuOpen}
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
         <div
           className={cn(
-            "fixed inset-0 bg-background/95 backdrop-blur-md nav-layer flex flex-col items-center justify-center",
+            "fixed inset-0 overlay-layer min-h-dvh bg-background flex flex-col items-center justify-center px-6 py-24",
             "transition-all duration-300 md:hidden",
             isMenuOpen
-              ? "opacity-100 pointer-events-auto"
-              : "opacity-0 pointer-events-none"
+              ? "opacity-100 pointer-events-auto translate-y-0"
+              : "opacity-0 pointer-events-none -translate-y-4"
           )}
         >
-          <div className="flex flex-col space-y-7 text-xl">
+          <div className="flex w-full max-w-xs flex-col gap-3 text-xl">
             {navItems.map((item, key) => (
               <button
                 key={key}
                 onClick={() => handleNavClick(item)}
                 className={cn(
-                  "text-foreground/80 hover:text-primary transition-colors duration-300",
-                  getIsActive(item) ? "text-primary" : ""
+                  "w-full rounded-2xl border border-border bg-card/80 px-5 py-3 text-center text-foreground/80 shadow-sm transition-colors duration-300 hover:border-primary/50 hover:text-primary",
+                  getIsActive(item) ? "border-primary/60 bg-primary/10 text-primary" : ""
                 )}
               >
                 {item.name}

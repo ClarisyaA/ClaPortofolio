@@ -68,7 +68,7 @@ const techProjects = [
         title: "MarketSync - Marketing Channel DSS",
         role: "Data Analyst",
         description: "Data-driven dashboard for marketing channel optimization using PCA and K-Means clustering for customer segmentation and business insights.",
-        image: "/projects/Boo.png",
+        image: "/projects/MarketSync.png",
         tags: ["Streamlit", "Python", "PCA", "K-Means", "Data Visualization", "Analytics"],
         demoUrl: "https://marketsync.streamlit.app/",
         githubUrl: "#",

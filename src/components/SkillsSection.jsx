@@ -1,6 +1,7 @@
 import {
   SiAlpinedotjs,
   SiArduino,
+  SiCodeigniter,
   SiCplusplus,
   SiFigma,
   SiGit,
@@ -35,6 +36,7 @@ const skills = [
   { name: "React", icon: SiReact, tone: "text-sky-400" },
   { name: "Next.js", icon: SiNextdotjs, tone: "text-foreground" },
   { name: "Laravel", icon: SiLaravel, tone: "text-red-500" },
+  { name: "CodeIgniter 4", icon: SiCodeigniter, tone: "text-red-600" },
   { name: "Tailwind CSS", icon: SiTailwindcss, tone: "text-cyan-400" },
   { name: "Alpine.js", icon: SiAlpinedotjs, tone: "text-teal-500" },
   { name: "Streamlit", icon: SiStreamlit, tone: "text-red-500" },
